@@ -5,7 +5,7 @@
     /// </summary>
     public static class StudioTrackLayout {
         /// <summary>
-        /// 105 − 2 × 21 = 63. A single step (84) still shows the phonemizer row,
+        /// 104 − 2 × 20 = 64. A single step (84) still shows the phonemizer row,
         /// which the compact Studio header drops.
         /// </summary>
         public const double CompactTrackHeight =

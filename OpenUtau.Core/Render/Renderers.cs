@@ -11,6 +11,7 @@ namespace OpenUtau.Core.Render {
         public const string CLASSIC = "CLASSIC";
         public const string WORLDLINE_R = "WORLDLINE-R";
         public const string WORLDLINE_R2 = "WORLDLINE-R2";
+        public const string WORLDLINE_R11 = "WORLDLINE-R1.1";
         public const string ENUNU = "ENUNU";
         public const string VOGEN = "VOGEN";
         public const string DIFFSINGER = "DIFFSINGER";
@@ -18,7 +19,7 @@ namespace OpenUtau.Core.Render {
         public const string HIFIUTAU = "HIFIUTAU";
         public const string CUSTOM_SERVER = "CUSTOM_SERVER";
 
-        static readonly string[] classicRenderers = new[] { WORLDLINE_R, CLASSIC, HIFIUTAU, CUSTOM_SERVER };
+        static readonly string[] classicRenderers = new[] { WORLDLINE_R, WORLDLINE_R11, CLASSIC, HIFIUTAU, CUSTOM_SERVER };
         static readonly string[] enunuRenderers = new[] { ENUNU };
         static readonly string[] vogenRenderers = new[] { VOGEN };
         static readonly string[] diffSingerRenderers = new[] { DIFFSINGER };
@@ -45,6 +46,7 @@ namespace OpenUtau.Core.Render {
         public static List<string> getRendererOptions() {
             return new List<string> {
                 "WORLDLINE-R",
+                "WORLDLINE-R1.1",
                 "Classic",
                 "HiFiUTAU",
                 "Custom Server"
@@ -56,6 +58,8 @@ namespace OpenUtau.Core.Render {
                 switch (Preferences.Default.DefaultRenderer) {
                     case "Classic":
                         return CLASSIC;
+                    case "WORLDLINE-R1.1":
+                        return WORLDLINE_R11;
                     case "HiFiUTAU":
                     case "HiFiUTAU Local":
                     case "HiFiUTAU Online":
@@ -67,13 +71,22 @@ namespace OpenUtau.Core.Render {
             return GetSupportedRenderers(singerType)[0];
         }
 
+        /// <summary>
+        /// <see cref="IRenderer.ExpressionGraphSlot"/> of a renderer id; an unknown id is its own slot.
+        /// </summary>
+        public static string GetExpressionGraphSlot(string renderer) =>
+            GetOrCreate(renderer)?.ExpressionGraphSlot ?? renderer;
+
         public static IRenderer CreateRenderer(string renderer) {
             if (renderer == CLASSIC) {
                 return new ClassicRenderer();
             } else if (renderer == WORLDLINE_R2) {
-                return new WorldlineRenderer(version: 2);
+                return new WorldlineRenderer(version: 20);
+            } else if (renderer == WORLDLINE_R11) {
+                // Before the prefix match below, which maps any WORLDLINE-* to R1.
+                return new WorldlineRenderer(version: 11);
             } else if (renderer?.StartsWith(WORLDLINE_R.Substring(0, 9)) ?? false) {
-                return new WorldlineRenderer(version: 1);
+                return new WorldlineRenderer(version: 10);
             } else if (renderer == ENUNU) {
                 return new Enunu.EnunuRenderer();
             } else if (renderer == VOGEN) {

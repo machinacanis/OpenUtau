@@ -30,7 +30,7 @@
 
 **Expression**：参数，按 `abbr` 注册在 Project 上（`dyn`、`pitd`、`vel`、`vol`、`clr`、`genc`、`xsy`…）。有 note 级和 curve 级。定义在 `OpenUtau.Core/Format/USTx.cs`。
 
-**Renderer**：把 Phrase 合成 PCM 的引擎。Classic 歌手可选 `WORLDLINE-R`、`CLASSIC`、`HIFIUTAU`、`CUSTOM_SERVER`。默认是 `WORLDLINE-R`，仅当偏好 `DefaultRenderer == "Classic"` 时用 `CLASSIC`。`HIFIUTAU` 在同一进程内 ONNX 推理，不走 HTTP；`CUSTOM_SERVER` 把 Phrase JSON POST 到外部服务。两套实现互不引用。_Avoid_：engine 当 Renderer 的同义词。
+**Renderer**：把 Phrase 合成 PCM 的引擎。Classic 歌手可选 `WORLDLINE-R`、`WORLDLINE-R1.1`、`CLASSIC`、`HIFIUTAU`、`CUSTOM_SERVER`。默认是 `WORLDLINE-R`，仅当偏好 `DefaultRenderer == "Classic"` 时用 `CLASSIC`，`WORLDLINE-R1.1` 时用 Worldline-R1.1。`HIFIUTAU` 在同一进程内 ONNX 推理，不走 HTTP；`CUSTOM_SERVER` 把 Phrase JSON POST 到外部服务。两套实现互不引用。_Avoid_：engine 当 Renderer 的同义词。
 
 **Phrase**：连续 Phoneme 组成的渲染单元 `RenderPhrase`。Renderer 只吃 Phrase，不直接吃 Note。
 
@@ -96,7 +96,7 @@ Avalonia 12 + ReactiveUI。ViewModel 继承 `ViewModelBase`（`ReactiveObject`�
 - 共享：`NotesViewModel`、Command、hit testing、`NoteEditStates` 仍是唯一编辑逻辑。
 - Studio 专属：`OpenUtau/Studio/`。以后只在 Studio 里出现的功能或布局改动放这里，不要在 ViewModel 里散落 `if (UseStudioUI)`。
 - 绘制：`NotesCanvas` / `WaveformImage` 读 `ThemeManager`；`ApplyPianoRollStyle` 在开关关闭时回到经典刷子。
-- 轨道头：默认高度取 `StudioTrackLayout.DefaultTrackHeight`（Studio 开 63 = 105 − 2×21，关 105）；头像左侧彩色条宽度取 `StudioTrackLayout.ColorBarWidth`（0 / 6）。
+- 轨道头：默认高度取 `StudioTrackLayout.DefaultTrackHeight`（Studio 开 64 = 104 − 2×20，关 104）；头像左侧彩色条宽度取 `StudioTrackLayout.ColorBarWidth`（0 / 6）。
 - 按钮皮肤：Studio One 风格按钮 = `Styles/StudioOneControls.axaml` 的 `.s1` 类（`mute` / `solo` 角色，`fxOn` 表示非开关按钮的开启态）。新按钮加类名即可复用，不要在控件里另写 chrome 样式；该文件只由 `StudioStyles.axaml` 在 Studio UI 开启时载入。
 - 样式优先级：控件自身 `Styles` 高于应用级 `Styles`（`TrackHeader.axaml` 的 `ToggleButton{Background=Transparent}` 就是这样压掉 `Styles.axaml` 的）。所以 Studio 的按钮 chrome 必须放在模板内部（`StudioOneControls.axaml`），而彩色条宽度这类必须走绑定——XAML 局部值高于任何样式 setter。
 

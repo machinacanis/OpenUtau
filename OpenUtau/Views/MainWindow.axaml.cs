@@ -586,13 +586,7 @@ namespace OpenUtau.App.Views {
         void OnMenuRedo(object sender, RoutedEventArgs args) => viewModel.Redo();
 
         void OnMenuExpressionss(object sender, RoutedEventArgs args) {
-            var dialog = new ExpressionsDialog() {
-                DataContext = new ExpressionsViewModel(),
-            };
-            dialog.ShowDialog(this);
-            if (dialog.Position.Y < 0) {
-                dialog.Position = dialog.Position.WithY(0);
-            }
+            ExpressionsDialog.Open(this);
         }
 
         async void OnMenuSingers(object sender, RoutedEventArgs args) {
@@ -2050,7 +2044,6 @@ namespace OpenUtau.App.Views {
                     Log.Information("Cache cleared.");
                 }
                 PlaybackManager.Inst.StopPlayback();
-                MixFxWindowManager.CloseAll();
                 Preferences.Default.MainWindowSize.Set(Width, Height, Position.X, Position.Y, (int)WindowState);
                 Preferences.Default.RecoveryPath = string.Empty;
                 Preferences.Save();
@@ -2062,7 +2055,6 @@ namespace OpenUtau.App.Views {
                     return;
                 }
                 pianoRollWindow?.Close();
-                MixFxWindowManager.CloseAll();
                 forceClose = true;
                 Close();
             }, TaskScheduler.FromCurrentSynchronizationContext());
@@ -2086,11 +2078,6 @@ namespace OpenUtau.App.Views {
         }
 
         public void OnNext(UCommand cmd, bool isUndo) {
-            if (cmd is LoadProjectNotification) {
-                MixFxWindowManager.CloseAll();
-            } else if (cmd is RemoveTrackCommand removeTrack) {
-                MixFxWindowManager.CloseFor(removeTrack.track);
-            }
             if (cmd is ErrorMessageNotification notif) {
                 switch (notif.e) {
                     case Core.Render.NoResamplerException:

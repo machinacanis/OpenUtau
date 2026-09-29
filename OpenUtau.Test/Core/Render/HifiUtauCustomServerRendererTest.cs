@@ -51,7 +51,7 @@ namespace OpenUtau.Test.Core.Render {
             public void ClassicSinger_OffersBothNewRenderersWithoutDroppingWorldline() {
                 var supported = Renderers.GetSupportedRenderers(USingerType.Classic);
                 Assert.Equal(
-                    new[] { Renderers.WORLDLINE_R, Renderers.CLASSIC, Renderers.HIFIUTAU, Renderers.CUSTOM_SERVER },
+                    new[] { Renderers.WORLDLINE_R, Renderers.WORLDLINE_R11, Renderers.CLASSIC, Renderers.HIFIUTAU, Renderers.CUSTOM_SERVER },
                     supported);
             }
 

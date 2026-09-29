@@ -42,6 +42,7 @@ namespace OpenUtau.App.ViewModels {
         [Reactive] public partial bool Solo { get; set; }
         [Reactive] public partial bool IsSelected { get; set; }
         [Reactive] public partial Bitmap? Avatar { get; set; }
+        [Reactive] public partial double AvatarHeight { get; set; }
         [Reactive] public partial bool IsSingerVisible { get; set; }
         [Reactive] public partial bool IsPhonemizerVisible { get; set; }
         [Reactive] public partial bool IsRendererVisible { get; set; }
@@ -500,7 +501,7 @@ namespace OpenUtau.App.ViewModels {
 
         public void OpenMixFxDialog() {
             if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop && desktop.MainWindow != null) {
-                MixFxWindowManager.Open(desktop.MainWindow, track);
+                MixFxDialog.Open(desktop.MainWindow, track);
             }
         }
     }

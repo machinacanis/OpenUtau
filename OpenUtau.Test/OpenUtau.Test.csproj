@@ -28,7 +28,7 @@
          (AvaloniaUI/Avalonia#22072: xunit v3 4.0 is unsupported). Upstream ships no
          [AvaloniaFact] tests, so its own suite does not hit this. Pin xunit.v3 / .common /
          .extensibility.core to 3.2.2 (the last 3.x stable) until Avalonia releases a headless
-         adapter for xunit.v3 4.x -- 12.1.3 still depends on xunit.v3.extensibility.core 3.2.2.
+         adapter for xunit.v3 4.x; 12.1.3 still depends on xunit.v3.extensibility.core 3.2.2.
          xunit.runner.visualstudio stays at the upstream 4.0.0: it is VSTest-only, is not used
          by the Microsoft.Testing.Platform path, and has no 3.x release. -->
     <PackageReference Include="xunit.v3" Version="3.2.2" />

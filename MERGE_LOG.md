@@ -1154,3 +1154,94 @@
 - **23 个 `yamleditor.*` / `singers.oto` 键尚无译文**：各语言以注释占位（上游本轮只加了英文源）。不在本次合并里新译。
 - **Studio 轨道头的 M / S / fx 位置随上游对齐而变**（M / S 移到轨道名行、fx 移到推子行）。这是取上游布局的直接结果，已由第 5 条截图确认；若以后想保留旧的竖排 M / S / fx 列，需另开 topic 在上游布局上做 fork 覆盖（会重新引入本文件的同步冲突，不建议）。
 - **已推送 `origin`**：`2fd6e97c..f74c9a12  master -> master`（合并提交 `f74c9a12` 与其 14 个上游提交一并上链）。
+
+---
+
+## Merge 2026-09-29 a2cf1b25
+
+- **时间**（UTC）：`2026-09-29T12:21:00Z`（验证完成时间）
+- **合并方式**：`git merge --no-commit --no-ff upstream/master`（merge-base `5170ebe2e299ba61359fe99022245b4b7010d566`，即上次合并记录的上游基线；合并范围 `5170ebe2..a2cf1b25`）
+- **上游基线**：`a2cf1b259e2a514d4db9e7bf035a012e429dc1bc` — fix singer window not saving after the first save (#2475)
+- **fork 侧基线**：`79b0df0a266acc90b0e994b97b61c22fe2d3733b`（`docs(merge-log): record the push of the 5170ebe2 upstream sync`）
+- **计数**：相对上次基线是 **22** 个线性 commit，不是口头说的 21。22 个全部引入。
+
+### 引入的上游 commit（22 个，线性，旧→新）
+
+| # | SHA | 主题 | 作者 |
+| --- | --- | --- | --- |
+| 1 | `d0e3b6ab93fb409091d49dbbe9e98ca991fe2a3f` | Update ThaiVCCVPhonemizer.cs (#2461) | DELTA SYNTH |
+| 2 | `d01afa281b7268fc2e73f5694703232484bd3b99` | Add masked curves | Sugita Akira |
+| 3 | `4a3a5362bcbc135a868ebbca085ccaab49dcfbdc` | Add expression graphs that drive curves | Sugita Akira |
+| 4 | `4d38507bef94a10009db9844f6249e30895c0f6b` | Let expression graphs read and drive per-phoneme values | Sugita Akira |
+| 5 | `378dc0ea96e823a66fa55e11fcc52c2ee2de0bbe` | Let expression graphs read and drive pitch | Sugita Akira |
+| 6 | `8da8bb2417195c604fec5a42d76e3147318e5fd0` | Add an expression graph editor | Sugita Akira |
+| 7 | `5700f9e646e3d1864155e79ee76b1e7fde59d1ee` | Add a masked curve node to expression graphs | Sugita Akira |
+| 8 | `608a321d87086afb2378126aef494ccc3c7c7740` | Load rendered pitch into RPIT and let graphs prefer a pitch override | Sugita Akira |
+| 9 | `a7b2ccb625e4fe819bc05c104760f9169e864723` | TrackHeader Tweaks (#2462) | Mashi |
+| 10 | `dcae63e0ecca30e4622c2b0838a8987eaca6796e` | Analyze Worldline phrase segments in parallel | Sugita Akira |
+| 11 | `ea3e92f76bc5169bdb306bdaf1af7f1fc8b2d1d7` | Add Worldline-R1.1 renderer | Sugita Akira |
+| 12 | `c74e89fba58221403eaee4efaadb05967a6fd902` | Fix ComboBox focus issue in Note Properties Panel (#2464) | Maiko |
+| 13 | `ff6614a2c78f283dffc3c1f57a141c16499580b3` | Key expression graph defaults by slot in the editor | Sugita Akira |
+| 14 | `04c4e61005eadbb368cc7c83104cb60665da1203` | Rebuild Worldline (#2468) | github-actions[bot] |
+| 15 | `55738e37b525d2e81c4c7a3da4540606dc749122` | fix(pianoroll): don't invert the knife tool clamp range on short notes (#2470) | Kakaru |
+| 16 | `dd88522b59176b8427fd64cbdedef359a08a1ad0` | Follow the ONNX runner preference in hnsep | Sugita Akira |
+| 17 | `30d099628a7051004efe979689d11f8596e1a44a` | Redesign Track Polish as a live, non-modal effects rack | Sugita Akira |
+| 18 | `b4c84add64e62d28ca04433c1ee36b65b08142f4` | Export and import expression graphs with their expressions | Sugita Akira |
+| 19 | `252a143e9741ba44cdc9d2d8528184651700d0bc` | Merge the Expressions window's tabs into one row | Sugita Akira |
+| 20 | `19a297a0038fdfcd265529c76136ab14cd3f98ca` | Fix UExpressionDescriptor.Equals | Sugita Akira |
+| 21 | `03864bf1a592955b6d698d5a3a39825a1f19a4b6` | [EN2JA] Reverse WanaKana index to Prioritize Singer Overrides + Implement Transitionalclusters (#2473) | cadlaxa |
+| 22 | `a2cf1b259e2a514d4db9e7bf035a012e429dc1bc` | fix singer window not saving after the first save (#2475) | Astel123457 |
+
+### 修改面
+
+- 上游 85 个文件（+7476 / −537）。fork 自 base 起改过的文件与上游重叠 **21** 个；其中 **9** 个出现冲突标记，其余 12 个自动合并。
+- 内容：表达式图（曲线 / 音素 / 音高 / 遮罩曲线 / 编辑器 / 导入导出）、WORLDLINE-R1.1（hnsep + continuous noise，`runtimes/` 六个二进制重编）、Track Polish 改成实时非模态机架、轨道头 18px 图标与高度网格（默认 104、步进 20）、刀工具短音符钳制、音符属性 ComboBox 焦点、EN2JA 过渡簇、歌手窗口首次保存后不再丢保存。
+
+### 冲突（9 个文件）
+
+| 文件 | 上游侧改动量（base→上游） | fork 侧改动量（base→fork） | 上游侧来源 | fork 侧来源 |
+| --- | --- | --- | --- | --- |
+| `OpenUtau.Core/Format/USTx.cs` | +7 / −1 | +21 / −0 | `d01afa28` / `608a321d`（`RPIT` / `PITO` 遮罩曲线） | `fa88ca2c`（HiFi / Custom Server 表达式） |
+| `OpenUtau.Core/Render/Renderers.cs` | +13 / −3 | +30 / −7 | `ea3e92f7`（`WORLDLINE-R1.1`） | `fa88ca2c`（`HIFIUTAU` / `CUSTOM_SERVER`） |
+| `OpenUtau/Controls/ExpressionCanvas.cs` | +81 / −0 | +55 / −10 | `d01afa28`（`DrawMaskedCurve`） | Studio 曲线描边 `CurveStroke()` |
+| `OpenUtau/Controls/TrackHeader.axaml` | +21 / −21 | +31 / −20 | `a7b2ccb6`（18px 图标、`AvatarHeight`、多一行） | Studio 色条 / 徽章 / `.s1`（`55615237` 等） |
+| `OpenUtau/ViewModels/TrackHeaderViewModel.cs` | +2 / −2 | +22 / −16 | `30d09962`（`MixFxDialog.Open`） | `9fd108be`（`MixFxWindowManager.Open`） |
+| `OpenUtau/ViewModels/TrackSettingsViewModel.cs` | +40 / −2 | +43 / −8 | `8da8bb24`（表达式图选择） | `fa88ca2c`（Custom Server / HiFi 字段） |
+| `OpenUtau/Views/TrackSettingsDialog.axaml` | +7 / −3 | +15 / −1 | 同上（`SizeToContent` + 图下拉） | 同上（服务器 URL / endpoint） |
+| `OpenUtau/Views/MixFxDialog.axaml` | +466 / −132 | +5 / −3 | `30d09962`（机架重写） | `9fd108be`（Apply 按钮） |
+| `OpenUtau/Views/MixFxDialog.axaml.cs` | +88 / −4 | +41 / −1 | `30d09962`（每轨一窗、实时、关闭回滚） | `9fd108be`（快捷键转发 + Apply） |
+
+### 判定流程取证
+
+1. **量化**：见上表（`git diff --numstat 5170ebe2 upstream/master` 与 `5170ebe2 HEAD`）。两侧改动量均非 0。
+2. **同目标**：只有 Track Polish。fork `9fd108be`（Kurotani Takeo，经 PR #13 `392d0510` 汇入）与上游 `30d09962`（Sugita Akira）都是「非模态 Track Polish，主窗口保持可用」。表达式、渲染器列表、轨道设置、曲线绘制不是同一目标。
+3. **轨道头**：上游改的是通用图标 / 高度 / 头像高度；fork 改的是 Studio 色条、徽章位置、`.s1` 类名。不是同一目标。
+4. **集合类**：`Strings.axaml` 比键。合并后英文源 **1030** 键、无重键（上次 967 + 上游 63）。fork 键仍是超集。
+
+### 决策记录
+
+- **Track Polish：取上游机架，删掉 fork 的单窗口管理器。** `MixFxDialog.axaml` 整取上游。`MixFxDialog.Open` 取代 `MixFxWindowManager`（每轨一窗、`ICmdSubscriber` 在换工程 / 删轨时自己关、未点 OK 关闭则 `Revert`）。`MainWindow` 里的 `CloseAll` / `CloseFor` 删除——那是被取代的生命周期。**只保留 fork 独有的快捷键转发**（隧道上吃掉 Space，其余未消费键转给 `HandleGlobalShortcut`，Alt+F4 不转发），因为上游窗口同样非模态，但没有这条。Apply 按钮不保留：上游是实时写入，Apply 是同一目标的旧路径。
+- **`USTx.cs` / `Renderers.cs` / `TrackSettings*` / `ExpressionCanvas.cs`：并集。** HiFi 表达式常量与 `RPIT`/`PITO` 都注册。Classic 渲染器列表为 `WORLDLINE-R, WORLDLINE-R1.1, CLASSIC, HIFIUTAU, CUSTOM_SERVER`。`CUSTOM_SERVER` 仍绕开实例缓存。轨道设置对话框用上游的 `SizeToContent` + `!HasRenderer` 警告，并保留服务器 URL / endpoint；`Finish()` 先写表达式图，再写 Classic / Custom Server / HiFi 设置。曲线画布先画遮罩曲线并返回，普通曲线仍走 fork 的 `CurveStroke()`。
+- **`TrackHeader.axaml`：以上游新布局为底，贴回 Studio chrome。** 保留色条、`AvatarPanel`、名字旁 `TrackNoBadge`、`HeaderButtons`、M/S 的 `s1` 类名与 `x:Name`、fx 的 `x:Name` 且不加 `s1`、`HorizontalAlignment="Stretch"`。图标、18px 尺寸、`AvatarHeight`、末行 `*` 取上游。头像角上的旧编号徽章不留（与名字旁徽章重复）。
+- **表达式图驱动 `stms`：补一行。** HiFi / Custom Server 的 `SupportsExpression` 为 true，`stms` 是数值表达式，图可以把它选成音素输出；上游 `WithDriven` 只回写 volume / modulation / MOD+ / 包络 / flag。把 `StretchMs` 改成 `{ get; private set; }`，驱动值含 `STMS` 时写入。选项型的 `phtp` / `strt` / `splc` 图不驱动，保持只读。
+- **默认渲染器偏好加上 `WORLDLINE-R1.1`。** `getRendererOptions()` 与 `GetDefaultRenderer` 增加对应项，否则偏好下拉选不中新渲染器，空值回落仍是 `WORLDLINE-R`。
+- **Studio 紧凑高度跟着上游网格走。** `TrackHeightDefault` 105→104、`TrackHeightDelta` 21→20，公式仍是「默认减两步」= **64**。64 ≥ 3×20 仍显示歌手行，< 4×20 仍藏音素器行，意图不变。`AGENTS.md` 的 63/105 改成 64/104。
+- **12 个自动合并的重叠文件取并集**（`PhraseSource` 的 HiFi 四字段与表达式图字段都在；`RenderPhrase` 的 fork hash 曲线与上游图采样都在；`Onnx` 的 native 守卫与 `getRunner`/`IsCpuRunner` 都在；`PhraseSourceHashTest` 保留 fork golden，并保留上游 `BuildFixture(IRenderer)`；`UTrack` 的 `serverUrl` 与 `ExpressionGraph` 都在；`PianoRoll.axaml.cs` 的面板拖拽与 `ExpressionsDialog.Open` 都在；`NoteProperties*` 的 Studio 滑条与 ComboBox `Focusable=False` 都在；`OpenUtau.Core.csproj` 的 `Newtonsoft.Json` 与上游 `FftFlat` 都在）。
+- **`OpenUtau.Test.csproj` 注释里的 `--` 改成 `;`。** 该注释是上次合并留下的，本轮上游没改这个文件，但 XML 注释不能含 `--`，`dotnet build OpenUtau.slnx` 直接 MSB4025。只改这一处标点，钉版 3.2.2 不变。
+- **字符串**：`python Misc/sync_strings.py` 一次。英文源 BOM 被脚本剥掉后已补回。英文源 1030 键、无重键；22 个语言文件键集与英文一致（新键以注释占位，未新译）。
+
+### 已验证
+
+1. **构建**：`dotnet build OpenUtau.slnx -c Debug` → **0 错误**（存量 nullable / xunit analyzer 警告，与历次同量级；增量复跑 0 错误）。
+2. **测试**：`dotnet test OpenUtau.Test` → 第一次 **557 通过 / 5 失败 / 2 跳过 / 总计 564**。5 个失败全是 `StudioTrackLayoutTest` 把高度钉在 105/63/21；按上面的决策改成 104/64/20 后该类 **6/6 通过**。其余 557 在该次全量里已通过，未再跑第二遍全量。跳过项仍是 `MergeAdjacentPhrasesLiveTest`（需 `OPENUTAU_TEST_SINGERS`）与 `DawRealPluginTest.RealPluginCompletesTheHandshakeAndPullsAudio`（需真实 DAW 插件）。账目：基线 513 → 564，差额 **+51**（上游表达式图 / Worldline-R1.1 / MixFx / hnsep 等新测试；未逐项对账到 51）。
+3. **UI 测试**：`dotnet run --project OpenUtau.UiTest -c Debug` → **Total 9 / Errors 0 / Failed 0**（基线 6，差额 +3 = 上游 `ExpressionGraphEditorTest`）。
+4. **桌面冒烟**：启动 `OpenUtau/bin/Debug/net10.0-windows/OpenUtau.exe`，18s 后仍存活，标题 `OpenUtau v0.0.0.0`，工作集约 235MB，stdout / stderr 空，`CloseMainWindow` 后退出。
+5. **`git diff --check`**：无空白错误。冲突标记扫描为空。`git diff --diff-filter=U` 为空。
+6. **BOM**：冲突写入剥掉了 `USTx.cs` / `ExpressionCanvas.cs` / `TrackSettingsViewModel.cs` 的 BOM（两侧原本都有），已补回。其余手改文件与两侧父本的 BOM 一致。
+
+### 未决项（已知、非阻塞）
+
+- **本机无 bazelisk**，未跑 `//worldline` 的 native 测试。`runtimes/` 二进制取上游 `04c4e610` 的制品，未在本机重编。
+- **上游 63 个新字符串键尚无译文**，各语言以注释占位。
+- **未推送 `origin`。** 本记录随合并提交落在本地 `master`。
+
